@@ -14,15 +14,24 @@
     <div class="container">
       <div class="px-4 py-5 my-5 text-center">
         <img class="d-block mx-auto mb-4" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Catcher-in-the-rye-red-cover.jpg" alt="" width="172" height="257">
-        <h1 class="display-5 fw-bold">The Catcher in the Rye</h1>
+        <h1 class="display-5 fw-bold"><%= book.title %></h1>
         <div class="col-lg-6 mx-auto">
-          <p class="lead mb-4 fw-bold">Authors: </p>
-          <p class="lead mb-4 fw-bold">Release Date: </p>
-          <p class="lead mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Edit</button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Delete</button>
-          </div>
+          <p class="lead mb-4 fw-bold">Authors: 
+            <% book.authors.forEach(author => { %>
+              <p><%= author.name %></p>
+            <% }); %></p>
+          <p class="lead mb-4 fw-bold">Release Date: <%= book.title %></p>
+          <p class="lead mb-4"><%= book.description %></p>
+          <% if (locals.userLogin && locals.userLogin.CategoryId === 1) { %>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <a href="/books/edit/<%= book.id %>" type="button" class="btn btn-primary btn-lg px-4 gap-3">Edit</a>
+              <button type="button" class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Delete
+              </button>
+              <%- include('partials/modalDelete.ejs',{book}) %>
+            </div>
+            
+          <% } %>
         </div>
       </div>
   </div>
