@@ -24,7 +24,10 @@
 
 
     <div class="list-group">
-      
+      <% if (books.length) { %>
+        <% books.forEach(b => { %>
+          <p><%= b.title %></p>
+        <% }) } %>
     </div>
   </div>
 </div>
